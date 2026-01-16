@@ -21,7 +21,7 @@ export function SignupForm3({
           <form className="p-6 md:p-8">
             <div className="flex flex-col gap-6">
               <div className="flex justify-center mb-2">
-                <Link href="/" className="flex items-center gap-2 font-medium">
+                <Link href="/" className="flex items-center gap-2 font-medium text-red-500">
                   <div className="bg-primary text-primary-foreground flex size-8 items-center justify-center rounded-md">
                     <Logo size={24} />
                   </div>

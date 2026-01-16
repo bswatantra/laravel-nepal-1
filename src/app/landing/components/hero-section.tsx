@@ -21,23 +21,26 @@ export function HeroSection() {
 
           {/* Main Headline */}
           <h1 className="mb-6 text-4xl font-bold tracking-tight sm:text-6xl lg:text-7xl">
-            Build Better
+            Build the Future of
             <span className="bg-linear-to-r from-primary to-primary/60 bg-clip-text text-transparent">
-              {" "}Web Applications{" "}
+              {" "}Nepal Tech Scene{" "}
             </span>
-            with Ready-Made Components
+            with
+            <span className="bg-linear-to-r from-primary to-primary/60 bg-clip-text text-transparent">
+              {" "}Laravel Nepal{" "}
+            </span>
           </h1>
 
           {/* Subheading */}
-          <p className="mx-auto mb-10 max-w-2xl text-lg text-muted-foreground sm:text-xl">
+          {/* <p className="mx-auto mb-10 max-w-2xl text-lg text-muted-foreground sm:text-xl">
             Accelerate your development with our curated collection of blocks, templates, landing pages,
             and admin dashboards. From free components to complete solutions, built with shadcn/ui.
-          </p>
+          </p> */}
 
           {/* CTA Buttons */}
-          <div className="flex flex-col gap-4 sm:flex-row sm:justify-center">
+          {/* <div className="flex flex-col gap-4 sm:flex-row sm:justify-center">
             <Button size="lg" className="text-base cursor-pointer" asChild>
-              <Link href="/auth/sign-up">
+              <Link href="/sign-up">
                 Get Started Free
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
@@ -48,11 +51,11 @@ export function HeroSection() {
                 Watch Demo
               </a>
             </Button>
-          </div>
+          </div> */}
         </div>
 
         {/* Hero Image/Visual */}
-        <div className="mx-auto mt-20 max-w-6xl">
+        <div className="mx-auto mt-20 max-w-6xl hidden">
           <div className="relative group">
             {/* Top background glow effect - positioned above the image */}
             <div className="absolute top-2 lg:-top-8 left-1/2 transform -translate-x-1/2 w-[90%] mx-auto h-24 lg:h-80 bg-primary/50 rounded-full blur-3xl"></div>

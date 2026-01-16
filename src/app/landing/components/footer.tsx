@@ -112,7 +112,7 @@ export function LandingFooter() {
           <div className="col-span-4 lg:col-span-2 max-w-2xl">
             <div className="flex items-center space-x-2 mb-4 max-lg:justify-center">
               <Link href="https://Laravel Nepal.com" target='_blank' className="flex items-center space-x-2 cursor-pointer text-red-500">
-                <Logo size={32} />
+                {/* <Logo size={32} /> */}
                 <span className="font-bold text-xl ">Laravel Nepal</span>
               </Link>
             </div>

@@ -1,10 +1,10 @@
 "use client"
 
 import {
-  Package,
-  Download,
   Users,
-  Star
+  BookOpen,
+  Code,
+  Rocket
 } from 'lucide-react'
 import { Card, CardContent } from '@/components/ui/card'
 import { DotPattern } from '@/components/dot-pattern'
@@ -12,36 +12,44 @@ import { DotPattern } from '@/components/dot-pattern'
 
 const stats = [
   {
-    icon: Package,
-    value: '500+',
-    label: 'Components',
-    description: 'Ready-to-use blocks'
-  },
-  {
-    icon: Download,
-    value: '25K+',
-    label: 'Downloads',
-    description: 'Trusted worldwide'
+    icon: BookOpen,
+    value: 'Learn & Grow',
+    label: '',
+    description: 'Access tutorials, blogs, and resources in Nepali and English to level up your skills.'
   },
   {
     icon: Users,
-    value: '10K+',
-    label: 'Developers',
-    description: 'Active community'
+    value: 'Connect',
+    label: '',
+    description: 'Join a vibrant community of Nepali developers, share knowledge, and collaborate.'
   },
   {
-    icon: Star,
-    value: '4.9',
-    label: 'Rating',
-    description: 'User satisfaction'
+    icon: Code,
+    value: 'Build Together',
+    label: '',
+    description: 'Work on open-source projects and contribute to Nepal growing tech ecosystem.'
+  },
+  {
+    icon: Rocket,
+    value: 'Launch Careers',
+    label: '',
+    description: 'Get mentorship, job opportunities, and career guidance from experienced developers.'
   }
 ]
 
 export function StatsSection() {
   return (
     <section className="py-12 sm:py-16 relative">
+      <div className="mx-auto max-w-4xl text-center mb-16">
+        <h2 className="text-3xl font-bold tracking-tight sm:text-4xl mb-6">
+          Why Join Our Community?
+        </h2>
+        <p className="text-lg text-muted-foreground mb-8">
+          Everything you need to succeed as a developer
+        </p>
+      </div>
       {/* Background with transparency */}
-      <div className="absolute inset-0 bg-gradient-to-r from-primary/8 via-transparent to-secondary/20" />
+      <div className="absolute inset-0 bg-linear-to-r from-primary/8 via-transparent to-secondary/20" />
       <DotPattern className="opacity-75" size="md" fadeStyle="circle" />
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative">
