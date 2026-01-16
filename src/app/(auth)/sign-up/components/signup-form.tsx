@@ -10,7 +10,7 @@ import { Logo } from "@/components/logo"
 import Link from "next/link"
 import Image from "next/image"
 
-export function SignupForm3({
+export function SignupForm({
   className,
   ...props
 }: React.ComponentProps<"div">) {

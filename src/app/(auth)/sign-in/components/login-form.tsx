@@ -9,7 +9,7 @@ import { Logo } from "@/components/logo"
 import Link from "next/link"
 import Image from "next/image"
 
-export function LoginForm3({
+export function LoginForm({
   className,
   ...props
 }: React.ComponentProps<"div">) {

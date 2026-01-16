@@ -1,4 +1,4 @@
-import { ForgotPasswordForm1 } from "./components/forgot-password-form-1"
+import { ForgotPasswordForm } from "./components/forgot-password-form"
 import { Logo } from "@/components/logo"
 import Link from "next/link"
 
@@ -12,7 +12,7 @@ export default function ForgotPasswordPage() {
           </div>
           Laravel Nepal
         </Link>
-        <ForgotPasswordForm1 />
+        <ForgotPasswordForm />
       </div>
     </div>
   )
