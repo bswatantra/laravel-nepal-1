@@ -6,8 +6,8 @@ import { SidebarConfigProvider } from "@/contexts/sidebar-context";
 import { inter } from "@/lib/fonts";
 
 export const metadata: Metadata = {
-  title: "Shadcn Dashboard",
-  description: "A dashboard built with Next.js and shadcn/ui",
+  title: "Laravel Nepal Dashboard",
+  description: "",
 };
 
 export default function RootLayout({
