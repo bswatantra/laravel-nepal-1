@@ -28,15 +28,13 @@ import { Logo } from '@/components/logo'
 import { MegaMenu } from '@/components/landing/mega-menu'
 import { ModeToggle } from '@/components/mode-toggle'
 import { useTheme } from '@/hooks/use-theme'
+import { useRouter } from 'next/navigation'
 
 const navigationItems = [
   { name: 'Home', href: '#hero' },
-  // { name: 'Features', href: '#features' },
   { name: 'Solutions', href: '#features', hasMegaMenu: true },
-  { name: 'Team', href: '#team' },
-  // { name: 'Pricing', href: '#pricing' },
-  // { name: 'FAQ', href: '#faq' },
   { name: 'Contact', href: '#contact' },
+  { name: 'Blogs', href: '/blogs' },
 ]
 
 // Solutions menu items for mobile
@@ -75,13 +73,14 @@ export function LandingNavbar() {
   const [isOpen, setIsOpen] = useState(false)
   const [solutionsOpen, setSolutionsOpen] = useState(false)
   const { setTheme, theme } = useTheme()
+  const router = useRouter()
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/80 backdrop-blur-xl supports-backdrop-filter:bg-background/60">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 flex h-16 items-center justify-between">
         {/* Logo */}
         <div className="flex items-center space-x-2">
-          <Link href="https://Laravel Nepal.com" className="flex items-center space-x-2 cursor-pointer text-red-500" target='_blank' rel="noopener noreferrer">
+          <Link href="/" className="flex items-center space-x-2 cursor-pointer text-red-500">
             {/* <Logo size={32} /> */}
             <span className="font-bold">
               Laravel Nepal
@@ -111,7 +110,7 @@ export function LandingNavbar() {
                       if (item.href.startsWith('#')) {
                         smoothScrollTo(item.href)
                       } else {
-                        window.location.href = item.href
+                        router.push(item.href)
                       }
                     }}
                   >

@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { BlogSection } from '../landing/components/blog-section'
 
 
 export const metadata: Metadata = {
@@ -18,6 +19,6 @@ export const metadata: Metadata = {
 }
 export default function Blogs() {
   return (
-    <h1>Blogs</h1>
+    <BlogSection />
   )
 }
