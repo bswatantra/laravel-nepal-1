@@ -15,8 +15,10 @@ export default function GuestLayout({ children }: { children: ReactNode }) {
             <main>{children}</main>
             <LandingFooter />
             {/* Theme Customizer */}
-            <LandingThemeCustomizerTrigger onClick={() => setThemeCustomizerOpen(true)} />
-            <LandingThemeCustomizer open={themeCustomizerOpen} onOpenChange={setThemeCustomizerOpen} />
+            <div className="hidden">
+                <LandingThemeCustomizerTrigger onClick={() => setThemeCustomizerOpen(true)} />
+                <LandingThemeCustomizer open={themeCustomizerOpen} onOpenChange={setThemeCustomizerOpen} />
+            </div>
         </div>
     )
 }

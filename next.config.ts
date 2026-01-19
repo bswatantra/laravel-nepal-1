@@ -18,6 +18,14 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "images.unsplash.com",
       },
+      {
+        protocol: "https",
+        hostname: "picperf.io",
+      },
+      {
+        protocol: "https",
+        hostname: "laravelnews.s3.amazonaws.com",
+      },
     ],
     formats: ["image/webp", "image/avif"],
   },
