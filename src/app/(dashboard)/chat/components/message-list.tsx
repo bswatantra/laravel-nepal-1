@@ -198,7 +198,7 @@ export function MessageList({ messages, users, currentUserId = "current-user" }:
                       <div className="relative group/message">
                         <div
                           className={cn(
-                            "rounded-lg px-3 py-2 text-sm break-words",
+                            "rounded-lg px-3 py-2 text-sm wrap-break-word",
                             isOwnMessage
                               ? "bg-primary text-primary-foreground"
                               : "bg-muted",

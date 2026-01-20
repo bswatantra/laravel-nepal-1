@@ -4,9 +4,11 @@ import { getBrowser } from "@/lib/scraper";
 export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams;
 
-  const pageNumber = searchParams.get("page") || "1";
+  const pageNumber = searchParams.get("page") || 1;
 
-  const targetUrl = `https://laravelmagazine.com/articles?page=${pageNumber}`;
+  const params = new URLSearchParams({ page: String(pageNumber) });
+
+  const targetUrl = `https://laravelmagazine.com/articles?${params}`;
 
   let browser;
   try {

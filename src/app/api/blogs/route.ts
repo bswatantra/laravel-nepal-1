@@ -4,11 +4,14 @@ import { getBrowser } from "@/lib/scraper";
 export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams;
 
-  const pageNumber = searchParams.get("page") || "1";
+  const pageNumber = searchParams.get("page") || 1;
 
   const limit = searchParams.get("limit");
 
-  const targetUrl = `https://laravel-news.com/blog?page=${pageNumber}`;
+  const params = new URLSearchParams({ page: String(pageNumber) });
+  if (limit !== undefined) params.set("limit", String(limit));
+
+  const targetUrl = `https://laravel-news.com/blog?${params}`;
 
   let browser;
   try {
