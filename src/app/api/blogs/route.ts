@@ -4,9 +4,9 @@ import { getBrowser } from "@/lib/scraper";
 export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams;
 
-  const limit: string | null = searchParams.get("limit") || null;
+  const pageNumber = searchParams.get("page") || "1";
 
-  const targetUrl = "https://laravel-news.com/blog";
+  const targetUrl = `https://laravel-news.com/blog?page=${pageNumber}`;
 
   let browser;
   try {
@@ -51,7 +51,7 @@ export async function GET(request: NextRequest) {
     );
 
     return NextResponse.json({
-      blogPosts: blogPosts.slice(0, Number(limit) || blogPosts.length),
+      blogPosts,
     });
   } catch (error) {
     console.error("Scraping error:", error);

@@ -1,37 +1,73 @@
-"use client"
-import Image from 'next/image';
-import { ArrowRight } from 'lucide-react';
-import { Card, CardContent } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { useEffect, useState } from 'react';
-import { BlogSectionSkeleton } from './blog-section-skeleton';
-import Link from 'next/link';
+"use client";
+import Image from "next/image";
+import { ArrowLeft, ArrowRight } from "lucide-react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { BlogSectionSkeleton } from "./blog-section-skeleton";
+import Link from "next/link";
+import { useQuery } from "@tanstack/react-query";
+import {
+  useSearchParams,
+  useRouter,
+  usePathname,
+} from "next/navigation";
+import { Button } from "@/components/ui/button";
 
-export function BlogSection({ showHeader = true, limit }: { showHeader?: boolean, limit?: number }) {
-  const [blogs, setBlogs] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+async function fetchBlogs({
+  page,
+  limit,
+}: {
+  page: number;
+  limit?: number;
+}) {
+  const res = await fetch(`/api/blogs?page=${page}&limit=${limit}`, {
+    cache: "no-store",
+  });
+  if (!res.ok) throw new Error("Failed to fetch blogs");
+  const data = await res.json();
+  return data.blogPosts;
+}
 
-  useEffect(() => {
-    async function fetchBlogs() {
-      try {
-        const res = await fetch(`/api/blogs?limit=${limit}`, { cache: 'no-store' });
-        if (!res.ok) throw new Error('Failed to fetch blogs');
-        const data = await res.json();
-        setBlogs(data.blogPosts);
-      } catch (err: any) {
-        setError(err.message);
-      } finally {
-        setLoading(false);
-      }
-    }
+export function BlogSection({
+  showHeader = true,
+  showPagination = true,
+  limit = 9,
+}: {
+  showHeader?: boolean;
+  showPagination?: boolean;
+  limit?: number;
+}) {
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const currentPage = Number(searchParams.get("page")) || 1;
 
-    fetchBlogs();
-  }, []);
+  const {
+    data: blogs,
+    isLoading,
+    isError,
+    error,
+  } = useQuery({
+    queryKey: ["blogs", currentPage, limit],
+    queryFn: () => fetchBlogs({ page: currentPage, limit }),
+  });
 
+  const handlePrevious = () => {
+    const newPage = Math.max(1, currentPage - 1);
+    const params = new URLSearchParams(searchParams);
+    params.set("page", String(newPage));
+    router.push(`${pathname}?${params.toString()}`);
+  };
 
-  if (error) {
-    return <div>Error: {error}</div>;
+  const handleNext = () => {
+    const newPage = currentPage + 1;
+    const params = new URLSearchParams(searchParams);
+    params.set("page", String(newPage));
+    router.push(`${pathname}?${params.toString()}`);
+  };
+
+  if (isError) {
+    return <div>Error: {error.message}</div>;
   }
 
   return (
@@ -47,16 +83,17 @@ export function BlogSection({ showHeader = true, limit }: { showHeader?: boolean
               From our blog
             </h2>
             <p className="text-lg text-muted-foreground">
-              Stay updated with the latest trends, best practices, and insights from our team of experts.
+              Stay updated with the latest trends, best practices, and insights
+              from our team of experts.
             </p>
           </div>
         )}
 
-        {loading && <BlogSectionSkeleton />}
+        {isLoading && <BlogSectionSkeleton />}
 
         {/* Blog Grid */}
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
-          {blogs.map((blog: any, index: number) => (
+          {blogs?.map((blog: any, index: number) => (
             <Card key={index} className="overflow-hidden py-0">
               <CardContent className="px-0">
                 <div className="aspect-video">
@@ -79,7 +116,7 @@ export function BlogSection({ showHeader = true, limit }: { showHeader?: boolean
                     </h3>
                   </a>
                   <p className="text-muted-foreground">{blog.description}</p>
-                  <div className='flex justify-between'>
+                  <div className="flex justify-between">
                     <Link
                       href={blog.link}
                       className="inline-flex items-center gap-2 text-primary hover:underline cursor-pointer"
@@ -93,6 +130,28 @@ export function BlogSection({ showHeader = true, limit }: { showHeader?: boolean
             </Card>
           ))}
         </div>
+        {/* Pagination */}
+        {showPagination && blogs?.length > 0 && (
+          <div className="flex justify-center items-center mt-12 space-x-4">
+            <Button
+              onClick={handlePrevious}
+              disabled={currentPage === 1}
+              variant="outline"
+            >
+              <ArrowLeft className="mr-2 h-4 w-4" />
+              Previous
+            </Button>
+            <span className="text-lg font-medium">{currentPage}</span>
+            <Button
+              onClick={handleNext}
+              disabled={!blogs || blogs.length < 15}
+              variant="outline"
+            >
+              Next
+              <ArrowRight className="ml-2 h-4 w-4" />
+            </Button>
+          </div>
+        )}
       </div>
     </section>
   );
