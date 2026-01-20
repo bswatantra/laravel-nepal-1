@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { BlogSection } from '../landing/components/blog-section'
+import { BlogSection } from './components/blog-section'
 
 
 export const metadata: Metadata = {

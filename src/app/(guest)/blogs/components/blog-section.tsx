@@ -4,6 +4,7 @@ import { ArrowRight } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { useEffect, useState } from 'react';
+import { BlogSectionSkeleton } from './blog-section-skeleton';
 
 export function BlogSection({ showHeader = true }: { showHeader?: boolean }) {
   const [blogs, setBlogs] = useState([]);
@@ -27,9 +28,6 @@ export function BlogSection({ showHeader = true }: { showHeader?: boolean }) {
     fetchBlogs();
   }, []);
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
 
   if (error) {
     return <div>Error: {error}</div>;
@@ -53,6 +51,8 @@ export function BlogSection({ showHeader = true }: { showHeader?: boolean }) {
           </div>
         )}
 
+        {loading && <BlogSectionSkeleton />}
+        
         {/* Blog Grid */}
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
           {blogs.map((blog: any, index: number) => (
