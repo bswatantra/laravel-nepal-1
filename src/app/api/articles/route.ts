@@ -6,9 +6,7 @@ export async function GET(request: NextRequest) {
 
   const pageNumber = searchParams.get("page") || "1";
 
-  const limit = searchParams.get("limit");
-
-  const targetUrl = `https://laravel-news.com/blog?page=${pageNumber}`;
+  const targetUrl = `https://laravelmagazine.com/articles?page=${pageNumber}`;
 
   let browser;
   try {
@@ -17,18 +15,18 @@ export async function GET(request: NextRequest) {
 
     await page.goto(targetUrl, { waitUntil: "domcontentloaded" });
 
-    const blogSectionContainer = await page.$("div.grid.gap-x-8.gap-y-12");
+    const articleSectionContainer = await page.$("div.grid.grid-cols-1");
 
-    if (!blogSectionContainer) {
-      console.error("Blog section container not found on the page.");
+    if (!articleSectionContainer) {
+      console.error("Article section container not found on the page.");
       return NextResponse.json(
-        { error: "Failed to find blog section." },
+        { error: "Failed to find articles section." },
         { status: 500 },
       );
     }
 
-    const blogPosts = await blogSectionContainer.$$eval(
-      "div.group.relative",
+    const articles = await articleSectionContainer.$$eval(
+      "article.group.bg-white.rounded-xl.shadow-sm.transition-all.duration-300.overflow-hidden.border.border-gray-100.flex.flex-col",
       (articles) => {
         return articles.map((article) => {
           const image = article.querySelector("img")?.src || "";
@@ -46,16 +44,14 @@ export async function GET(request: NextRequest) {
             description,
             slug,
             link,
-            source: "laravel-news",
+            source: "laravel-magazine",
           };
         });
       },
     );
 
-    const blogs = limit ? blogPosts.slice(0, Number(limit)) : blogPosts;
-
     return NextResponse.json({
-      blogs,
+      articles,
     });
   } catch (error) {
     console.error("Scraping error:", error);

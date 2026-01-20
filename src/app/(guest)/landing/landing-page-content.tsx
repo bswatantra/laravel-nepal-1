@@ -11,7 +11,7 @@ export function LandingPageContent() {
     <>
       <HeroSection />
       <StatsSection />
-      <BlogSection limit={6} />
+      <BlogSection limit={3} showPagination={false} />
       <FaqSection />
       <ContactSection />
     </>

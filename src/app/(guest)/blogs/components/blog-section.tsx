@@ -20,18 +20,20 @@ async function fetchBlogs({
   page: number;
   limit?: number;
 }) {
-  const res = await fetch(`/api/blogs?page=${page}&limit=${limit}`, {
+  const params = new URLSearchParams({ page: String(page) });
+  if (limit !== undefined) params.set('limit', String(limit));
+  const res = await fetch(`/api/blogs?${params}`, {
     cache: "no-store",
   });
   if (!res.ok) throw new Error("Failed to fetch blogs");
   const data = await res.json();
-  return data.blogPosts;
+  return data.blogs;
 }
 
 export function BlogSection({
   showHeader = true,
   showPagination = true,
-  limit = 9,
+  limit,
 }: {
   showHeader?: boolean;
   showPagination?: boolean;
