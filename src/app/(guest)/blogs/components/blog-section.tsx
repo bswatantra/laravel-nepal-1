@@ -5,8 +5,9 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { useEffect, useState } from 'react';
 import { BlogSectionSkeleton } from './blog-section-skeleton';
+import Link from 'next/link';
 
-export function BlogSection({ showHeader = true }: { showHeader?: boolean }) {
+export function BlogSection({ showHeader = true, limit }: { showHeader?: boolean, limit?: number }) {
   const [blogs, setBlogs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -14,7 +15,7 @@ export function BlogSection({ showHeader = true }: { showHeader?: boolean }) {
   useEffect(() => {
     async function fetchBlogs() {
       try {
-        const res = await fetch(`/api/blogs`, { cache: 'no-store' });
+        const res = await fetch(`/api/blogs?limit=${limit}`, { cache: 'no-store' });
         if (!res.ok) throw new Error('Failed to fetch blogs');
         const data = await res.json();
         setBlogs(data.blogPosts);
@@ -52,7 +53,7 @@ export function BlogSection({ showHeader = true }: { showHeader?: boolean }) {
         )}
 
         {loading && <BlogSectionSkeleton />}
-        
+
         {/* Blog Grid */}
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
           {blogs.map((blog: any, index: number) => (
@@ -62,30 +63,31 @@ export function BlogSection({ showHeader = true }: { showHeader?: boolean }) {
                   <Image
                     src={blog.image}
                     alt={blog?.imageAlt}
-                    width={400}
+                    width={450}
                     height={225}
-                    className="size-full object-cover dark:invert dark:brightness-[0.95]"
+                    className="size-full dark:invert dark:brightness-[0.95]"
                     loading="lazy"
                   />
                 </div>
                 <div className="space-y-3 p-6">
-                  {/* Category is not available in the API response */}
-                  {/* <p className="text-muted-foreground text-xs tracking-widest uppercase">
-                    {blog?.category}
-                  </p> */}
+                  <p className="text-muted-foreground text-xs tracking-widest uppercase">
+                    <Badge variant="destructive">{blog.source}</Badge>
+                  </p>
                   <a href={blog.link} className="cursor-pointer">
                     <h3 className="text-xl font-bold hover:text-primary transition-colors">
                       {blog.title}
                     </h3>
                   </a>
                   <p className="text-muted-foreground">{blog.description}</p>
-                  <a
-                    href={blog.link}
-                    className="inline-flex items-center gap-2 text-primary hover:underline cursor-pointer"
-                  >
-                    Learn More
-                    <ArrowRight className="size-4" />
-                  </a>
+                  <div className='flex justify-between'>
+                    <Link
+                      href={blog.link}
+                      className="inline-flex items-center gap-2 text-primary hover:underline cursor-pointer"
+                    >
+                      Learn More
+                      <ArrowRight className="size-4" />
+                    </Link>
+                  </div>
                 </div>
               </CardContent>
             </Card>

@@ -19,6 +19,6 @@ export const metadata: Metadata = {
 }
 export default function Blogs() {
   return (
-    <BlogSection  showHeader={false} />
+    <BlogSection showHeader={false} />
   )
 }
