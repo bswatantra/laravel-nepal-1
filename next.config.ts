@@ -8,8 +8,8 @@ const nextConfig: NextConfig = {
     ],
   },
   outputFileTracingIncludes: {
-    "https://laravelmagazine.com/articles": ["./node_modules/@sparticuz/chromium-min/**"],
-    "https://laravel-news.com/blog": ["./node_modules/@sparticuz/chromium-min/**"],
+    "https://laravelmagazine.com/articles": ["./node_modules/@sparticuz/chromium-min/**/*"],
+    "https://laravel-news.com/blog": ["./node_modules/@sparticuz/chromium-min/**/*"],
   },
   turbopack: {},
 
