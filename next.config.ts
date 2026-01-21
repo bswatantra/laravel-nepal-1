@@ -26,6 +26,10 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "laravelnews.s3.amazonaws.com",
       },
+      {
+        protocol: "https",
+        hostname: "laravelmagazine.com",
+      },
     ],
     formats: ["image/webp", "image/avif"],
   },
