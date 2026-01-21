@@ -115,15 +115,15 @@ function BlogSectionContent({
             {/* Blog Grid */}
             <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
               {visibleBlogs?.map((blog: any, index: number) => (
-                <Card key={`${blog.link}-${index}`} className="overflow-hidden">
-                  <CardContent className="p-0">
+                <Card key={`${blog.link}-${index}`} className="overflow-hidden py-0">
+                  <CardContent className="px-0">
                     <div className="aspect-video ">
                       <Image
                         src={blog.image}
                         alt={blog.imageAlt || blog.title}
                         width={450}
                         height={225}
-                        className="size-full object-cover"
+                        className="size-full"
                         loading={index < 3 ? "eager" : "lazy"}
                         priority={index < 3}
                       />
