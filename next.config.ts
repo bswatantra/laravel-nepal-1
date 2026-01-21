@@ -3,6 +3,7 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   experimental: {
     optimizePackageImports: ["lucide-react", "@radix-ui/react-icons"],
+    serverComponentsExternalPackages: ["@sparticuz/chromium", '@sparticuz/chromium-min'],
   },
   turbopack: {},
 
