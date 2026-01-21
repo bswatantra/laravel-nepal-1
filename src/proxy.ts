@@ -7,6 +7,7 @@ const PUBLIC_PATHS = [
   "/sign-in",
   "/sign-up",
   "/forgot-password",
+  "/blogs"
 ];
 
 export function proxy(request: NextRequest) {
