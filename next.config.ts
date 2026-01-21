@@ -3,7 +3,14 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   experimental: {
     optimizePackageImports: ["lucide-react", "@radix-ui/react-icons"],
-    serverComponentsExternalPackages: ["@sparticuz/chromium", '@sparticuz/chromium-min'],
+    serverComponentsExternalPackages: [
+      "@sparticuz/chromium",
+      "@sparticuz/chromium-min",
+    ],
+  },
+  outputFileTracingIncludes: {
+    "https://laravelmagazine.com/articles": ["./node_modules/@sparticuz/chromium/**","./node_modules/@sparticuz/chromium-min/**"],
+    "https://laravel-news.com/blog": ["./node_modules/@sparticuz/chromium/**","./node_modules/@sparticuz/chromium-min/**"],
   },
   turbopack: {},
 
