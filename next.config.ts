@@ -1,15 +1,13 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  outputFileTracingIncludes: {
+    "/api/articles": ["./node_modules/@sparticuz/chromium-min/**/*"],
+    "/api/blogs": ["./node_modules/@sparticuz/chromium-min/**/*"],
+  },
   experimental: {
     optimizePackageImports: ["lucide-react", "@radix-ui/react-icons"],
-    serverComponentsExternalPackages: [
-      "@sparticuz/chromium-min",
-    ],
-  },
-  outputFileTracingIncludes: {
-    "api/articles": ["./node_modules/@sparticuz/chromium-min/**/*"],
-    "api/blogs": ["./node_modules/@sparticuz/chromium-min/**/*"],
+    serverComponentsExternalPackages: ["@sparticuz/chromium-min"],
   },
   turbopack: {},
 
