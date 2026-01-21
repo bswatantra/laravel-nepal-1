@@ -57,12 +57,7 @@ import { schema } from "../schemas/task-schema"
 import { useIsMobile } from "@/hooks/use-mobile"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import {
-  type ChartConfig,
-  ChartContainer,
-  ChartTooltip,
-  ChartTooltipContent,
-} from "@/components/ui/chart"
+
 import { Checkbox } from "@/components/ui/checkbox"
 import {
   Drawer,
@@ -526,14 +521,14 @@ export function DataTable({
   }
 
   // Component for rendering table content
-  const TableContent = ({ 
-    currentTable, 
-    currentDataIds, 
-    handleCurrentDragEnd 
-  }: { 
-    currentTable: ReturnType<typeof useReactTable<z.infer<typeof schema>>>, 
-    currentDataIds: UniqueIdentifier[], 
-    handleCurrentDragEnd: (event: DragEndEvent) => void 
+  const TableContent = ({
+    currentTable,
+    currentDataIds,
+    handleCurrentDragEnd
+  }: {
+    currentTable: ReturnType<typeof useReactTable<z.infer<typeof schema>>>,
+    currentDataIds: UniqueIdentifier[],
+    handleCurrentDragEnd: (event: DragEndEvent) => void
   }) => (
     <>
       <div className="overflow-hidden rounded-lg border">
@@ -554,9 +549,9 @@ export function DataTable({
                         {header.isPlaceholder
                           ? null
                           : flexRender(
-                              header.column.columnDef.header,
-                              header.getContext()
-                            )}
+                            header.column.columnDef.header,
+                            header.getContext()
+                          )}
                       </TableHead>
                     )
                   })}
@@ -763,9 +758,9 @@ export function DataTable({
                           {header.isPlaceholder
                             ? null
                             : flexRender(
-                                header.column.columnDef.header,
-                                header.getContext()
-                              )}
+                              header.column.columnDef.header,
+                              header.getContext()
+                            )}
                         </TableHead>
                       )
                     })}
@@ -878,17 +873,17 @@ export function DataTable({
         value="past-performance"
         className="relative flex flex-col gap-4 overflow-auto px-4 lg:px-6"
       >
-        <TableContent 
+        <TableContent
           currentTable={pastPerformanceTable}
           currentDataIds={pastPerformanceIds}
           handleCurrentDragEnd={handlePastPerformanceDragEnd}
         />
       </TabsContent>
-      <TabsContent 
-        value="key-personnel" 
+      <TabsContent
+        value="key-personnel"
         className="relative flex flex-col gap-4 overflow-auto px-4 lg:px-6"
       >
-        <TableContent 
+        <TableContent
           currentTable={keyPersonnelTable}
           currentDataIds={keyPersonnelIds}
           handleCurrentDragEnd={handleKeyPersonnelDragEnd}
@@ -898,7 +893,7 @@ export function DataTable({
         value="focus-documents"
         className="relative flex flex-col gap-4 overflow-auto px-4 lg:px-6"
       >
-        <TableContent 
+        <TableContent
           currentTable={focusDocumentsTable}
           currentDataIds={focusDocumentsIds}
           handleCurrentDragEnd={handleFocusDocumentsDragEnd}
@@ -917,16 +912,6 @@ const chartData = [
   { month: "June", desktop: 214, mobile: 140 },
 ]
 
-const chartConfig = {
-  desktop: {
-    label: "Desktop",
-    color: "var(--primary)",
-  },
-  mobile: {
-    label: "Mobile",
-    color: "var(--primary)",
-  },
-} satisfies ChartConfig
 
 function TableCellViewer({ item }: { item: z.infer<typeof schema> }) {
   const isMobile = useIsMobile()
@@ -948,46 +933,43 @@ function TableCellViewer({ item }: { item: z.infer<typeof schema> }) {
         <div className="flex flex-col gap-4 overflow-y-auto px-4 text-sm">
           {!isMobile && (
             <>
-              <ChartContainer config={chartConfig}>
-                <AreaChart
-                  accessibilityLayer
-                  data={chartData}
-                  margin={{
-                    left: 0,
-                    right: 10,
-                  }}
-                >
-                  <CartesianGrid vertical={false} />
-                  <XAxis
-                    dataKey="month"
-                    tickLine={false}
-                    axisLine={false}
-                    tickMargin={8}
-                    tickFormatter={(value) => value.slice(0, 3)}
-                    hide
-                  />
-                  <ChartTooltip
-                    cursor={false}
-                    content={<ChartTooltipContent indicator="dot" />}
-                  />
-                  <Area
-                    dataKey="mobile"
-                    type="natural"
-                    fill="var(--color-mobile)"
-                    fillOpacity={0.6}
-                    stroke="var(--color-mobile)"
-                    stackId="a"
-                  />
-                  <Area
-                    dataKey="desktop"
-                    type="natural"
-                    fill="var(--color-desktop)"
-                    fillOpacity={0.4}
-                    stroke="var(--color-desktop)"
-                    stackId="a"
-                  />
-                </AreaChart>
-              </ChartContainer>
+              {/* <ChartContainer config={chartConfig}> */}
+              <AreaChart
+                accessibilityLayer
+                data={chartData}
+                margin={{
+                  left: 0,
+                  right: 10,
+                }}
+              >
+                <CartesianGrid vertical={false} />
+                <XAxis
+                  dataKey="month"
+                  tickLine={false}
+                  axisLine={false}
+                  tickMargin={8}
+                  tickFormatter={(value) => value.slice(0, 3)}
+                  hide
+                />
+
+                <Area
+                  dataKey="mobile"
+                  type="natural"
+                  fill="var(--color-mobile)"
+                  fillOpacity={0.6}
+                  stroke="var(--color-mobile)"
+                  stackId="a"
+                />
+                <Area
+                  dataKey="desktop"
+                  type="natural"
+                  fill="var(--color-desktop)"
+                  fillOpacity={0.4}
+                  stroke="var(--color-desktop)"
+                  stackId="a"
+                />
+              </AreaChart>
+              {/* </ChartContainer> */}
               <Separator />
               <div className="grid gap-2">
                 <div className="flex gap-2 leading-none font-medium">

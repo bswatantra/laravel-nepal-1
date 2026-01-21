@@ -22,9 +22,9 @@ export function proxy(request: NextRequest) {
     return NextResponse.redirect(new URL("/sign-up", request.url));
   }
 
-  // if (PUBLIC_PATHS.includes(pathname)) {
+  if (PUBLIC_PATHS.includes(pathname)) {
     return NextResponse.next();
-  // }
+  }
 
   return NextResponse.redirect(new URL("/sign-in", request.url));
 }
